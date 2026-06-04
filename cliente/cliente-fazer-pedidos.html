@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meus Pedidos</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cliente.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.png" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="cliente.html" class="menu-btn">Voltar</a>
+</nav>
+
+<div class="content">
+    <h1>Meus Pedidos</h1>
+
+    <table class="table-cliente">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Qtd</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaPedidos">
+            <tr><td colspan="3">Carregando...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+const { createClient } = supabase;
+
+const db = createClient(
+    "https://iqpyptpacglgoawlvyai.supabase.co",
+    "sb_publishable_f6rQubRvqp2V1GBD-YI1yQ_Zd7A_7BW"
+);
+
+async function carregarPedidos() {
+    const { data } = await db
+        .from("pedidos")
+        .select(`
+            *,
+            produto:produto_id (nome)
+        `);
+
+    const tabela = document.getElementById("listaPedidos");
+    tabela.innerHTML = "";
+
+    data.forEach(p => {
+        tabela.innerHTML += `
+            <tr>
+                <td>${p.produto?.nome}</td>
+                <td>${p.quantidade}</td>
+                <td>${p.status}</td>
+            </tr>
+        `;
+    });
+}
+
+carregarPedidos();
+</script>
+
+</body>
+</html>

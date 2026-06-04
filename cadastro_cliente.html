@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro Cliente - FAST & FAIR</title>
+
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<a href="javascript:history.back()" class="btn-voltar">← Voltar</a>
+
+<div class="login-container">
+
+    <h1 class="texto-3d texto-contorno" style="text-align:center;">Cadastro de Cliente</h1>
+
+    <form id="formCliente" class="login-box">
+
+        <label class="texto-3d texto-contorno">Nome Completo</label>
+        <input type="text" id="nome" placeholder="Digite seu nome" required>
+
+        <label class="texto-3d texto-contorno">Email</label>
+        <input type="email" id="email" placeholder="Digite seu email" required>
+
+        <label class="texto-3d texto-contorno">Senha</label>
+        <input type="password" id="senha" placeholder="Digite sua senha" required>
+
+        <label class="texto-3d texto-contorno">CPF</label>
+        <input type="text" id="cpf" placeholder="Digite seu CPF" required>
+
+        <label class="texto-3d texto-contorno">Endereço</label>
+        <input type="text" id="endereco" placeholder="Digite seu endereço" required>
+
+        <label class="texto-3d texto-contorno">Telefone</label>
+        <input type="text" id="telefone" placeholder="Digite seu telefone" required>
+
+        <button type="submit" class="login-btn texto-3d">Cadastrar</button>
+
+        <button type="button" onclick="pegarLocalizacao()">Usar minha localização</button>
+        <p id="statusLocalizacao" style="color:white; margin-top:10px;"></p>
+
+    </form>
+
+</div>
+
+<script>
+/* ============================
+   CONFIGURAÇÃO DO SUPABASE
+============================ */
+const { createClient } = supabase;
+
+const db = createClient(
+    "https://iqpyptpacglgoawlvyai.supabase.co",
+    "sb_publishable_f6rQubRvqp2V1GBD-YI1yQ_Zd7A_7BW"
+);
+
+/* ============================
+   VARIÁVEIS DE LOCALIZAÇÃO
+============================ */
+let lat = null;
+let lng = null;
+
+/* ============================
+   PEGAR LOCALIZAÇÃO DO USUÁRIO
+============================ */
+function pegarLocalizacao() {
+    document.getElementById("statusLocalizacao").innerText = "Obtendo localização...";
+
+    if (!navigator.geolocation) {
+        document.getElementById("statusLocalizacao").innerText =
+            "Seu navegador não suporta geolocalização.";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        (pos) => {
+            lat = pos.coords.latitude;
+            lng = pos.coords.longitude;
+
+            document.getElementById("statusLocalizacao").innerText =
+                "Localização capturada com sucesso!";
+        },
+        () => {
+            document.getElementById("statusLocalizacao").innerText =
+                "Não foi possível obter a localização. Ative o GPS.";
+        }
+    );
+}
+
+/* ============================
+   CADASTRAR CLIENTE
+============================ */
+document.getElementById("formCliente").addEventListener("submit", async e => {
+    e.preventDefault();
+
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+    const cpf = document.getElementById("cpf").value;
+    const endereco = document.getElementById("endereco").value;
+    const telefone = document.getElementById("telefone").value;
+
+    const { error } = await db.from("usuarios").insert({
+        nome,
+        email,
+        senha,
+        cpf,
+        endereco,
+        telefone,
+        tipo: "cliente",
+        lat,
+        lng
+    });
+
+    if (error) {
+        alert("Erro ao cadastrar: " + error.message);
+        return;
+    }
+
+    alert("Cadastro realizado com sucesso!");
+    location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

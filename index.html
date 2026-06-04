@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAST & FAIR - Marketplace</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="splash" aria-hidden="true">
+        <img src="img/logo.png" class="splash-logo" alt="Logo FAST & FAIR">
+    </div>
+
+    <!-- CABEÇALHO PADRÃO -->
+    <header>
+        <div class="header-left">
+            <!-- No index não tem botão voltar -->
+        </div>
+
+        <div class="header-right">
+            <a href="login.html" class="btn-topo">Login</a>
+            <img src="img/logo.jpg" alt="FAST & FAIR" class="logo">
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="content">
+
+        <h1 class="titulo-principal texto-contorno texto-3d">
+            Bem-vindo à FAST & FAIR
+        </h1>
+
+        <div class="categorias">
+            <a href="cliente/produtos.html?cat=frutas" class="cat frutas texto-contorno texto-3d">Frutas</a>
+            <a href="cliente/produtos.html?cat=legumes" class="cat legumes texto-contorno texto-3d">Legumes</a>
+            <a href="cliente/produtos.html?cat=hortalicas" class="cat hortaliças texto-contorno texto-3d">Hortaliças</a>
+            <a href="cliente/produtos.html?cat=organicos" class="cat organicos texto-contorno texto-3d">Orgânicos</a>
+            <a href="cliente/produtos.html?cat=temperos" class="cat temperos texto-contorno texto-3d">Temperos</a>
+        </div>
+
+    </main>
+
+    <!-- Splash desaparece -->
+    <script>
+        setTimeout(() => {
+            const splash = document.getElementById("splash");
+            if (splash) splash.style.display = "none";
+        }, 2500);
+    </script>
+
+</body>
+</html>

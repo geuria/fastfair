@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/admin.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.png" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="admin.html" class="menu-btn">Voltar</a>
+</nav>
+
+<div class="content">
+    <h1 class="admin-title">Produtos Cadastrados</h1>
+
+    <table class="table-admin">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Produtor</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaProdutos">
+            <tr><td colspan="4">Carregando...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="../js/admin.js"></script>
+<script>carregarProdutos();</script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produtor - FAST & FAIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Cabeçalho padrão -->
+    <header>
+        <div class="header-left">
+            <a href="escolher_tipo.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="header-right">
+            <a href="login.html" class="btn-topo">Login</a>
+            <a href="escolher_tipo.html" class="btn-topo">Cadastro</a>
+            <img src="img/logo.jpg" alt="FAST & FAIR" class="logo">
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="cadastro-container">
+            <h1>Cadastro de Produtor</h1>
+
+            <form id="formProdutor" class="cadastro-box">
+
+                <!-- Tipo de produtor -->
+                <label>Tipo de Produtor</label>
+                <select id="tipoProdutor" onchange="mostrarCamposOrganico()">
+                    <option value="normal">Produtor Normal</option>
+                    <option value="organico">Produtor Orgânico</option>
+                </select>
+
+                <!-- Campos extras para produtor orgânico -->
+                <div id="camposOrganico" style="display: none; margin-top: 20px;">
+                    <label>Número do Certificado Orgânico</label>
+                    <input type="text" id="certificado" placeholder="Ex: BR-12345">
+
+                    <label>Órgão Certificador</label>
+                    <input type="text" id="orgao" placeholder="IBD, ECOCERT, TECPAR...">
+
+                    <label>Validade do Certificado</label>
+                    <input type="date" id="validade">
+
+                    <label>Enviar Comprovante (PDF ou Imagem)</label>
+                    <input type="file" id="arquivoComprovante" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+
+                <label>Nome completo</label>
+                <input type="text" id="nome" placeholder="Seu nome" required>
+
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Seu email" required>
+
+                <label>Senha</label>
+                <input type="password" id="senha" placeholder="Crie uma senha" required>
+
+                <label>CPF ou CNPJ</label>
+                <input type="text" id="documento" placeholder="000.000.000-00 ou 00.000.000/0001-00" required>
+
+                <label>Nome da propriedade / marca</label>
+                <input type="text" id="propriedade" placeholder="Nome da sua produção" required>
+
+                <label>Endereço</label>
+                <input type="text" id="endereco" placeholder="Local da produção" required>
+
+                <label>Telefone</label>
+                <input type="text" id="telefone" placeholder="(00) 00000-0000" required>
+
+                <button type="button" onclick="usarLocalizacao()">Usar minha localização</button>
+                <button type="submit">Cadastrar</button>
+
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function mostrarCamposOrganico() {
+            const tipo = document.getElementById("tipoProdutor").value;
+            const campos = document.getElementById("camposOrganico");
+            campos.style.display = (tipo === "organico") ? "block" : "none";
+        }
+    </script>
+
+    <script src="js/cadastro_produtor.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produtor - FAST & FAIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Cabeçalho padrão -->
+    <header>
+        <div class="header-left">
+            <a href="escolher_tipo.html" class="btn-voltar">← Voltar</a>
+        </div>
+
+        <div class="header-right">
+            <a href="login.html" class="btn-topo">Login</a>
+            <a href="escolher_tipo.html" class="btn-topo">Cadastro</a>
+            <img src="img/logo.jpg" alt="FAST & FAIR" class="logo">
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="cadastro-container">
+            <h1>Cadastro de Produtor</h1>
+
+            <form id="formProdutor" class="cadastro-box">
+
+                <!-- Tipo de produtor -->
+                <label>Tipo de Produtor</label>
+                <select id="tipoProdutor" onchange="mostrarCamposOrganico()">
+                    <option value="normal">Produtor Normal</option>
+                    <option value="organico">Produtor Orgânico</option>
+                </select>
+
+                <!-- Campos extras para produtor orgânico -->
+                <div id="camposOrganico" style="display: none; margin-top: 20px;">
+                    <label>Número do Certificado Orgânico</label>
+                    <input type="text" id="certificado" placeholder="Ex: BR-12345">
+
+                    <label>Órgão Certificador</label>
+                    <input type="text" id="orgao" placeholder="IBD, ECOCERT, TECPAR...">
+
+                    <label>Validade do Certificado</label>
+                    <input type="date" id="validade">
+
+                    <label>Enviar Comprovante (PDF ou Imagem)</label>
+                    <input type="file" id="arquivoComprovante" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+
+                <label>Nome completo</label>
+                <input type="text" id="nome" placeholder="Seu nome" required>
+
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Seu email" required>
+
+                <label>Senha</label>
+                <input type="password" id="senha" placeholder="Crie uma senha" required>
+
+                <label>CPF ou CNPJ</label>
+                <input type="text" id="documento" placeholder="000.000.000-00 ou 00.000.000/0001-00" required>
+
+                <label>Nome da propriedade / marca</label>
+                <input type="text" id="propriedade" placeholder="Nome da sua produção" required>
+
+                <label>Endereço</label>
+                <input type="text" id="endereco" placeholder="Local da produção" required>
+
+                <label>Telefone</label>
+                <input type="text" id="telefone" placeholder="(00) 00000-0000" required>
+
+                <button type="button" onclick="usarLocalizacao()">Usar minha localização</button>
+                <button type="submit">Cadastrar</button>
+
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function mostrarCamposOrganico() {
+            const tipo = document.getElementById("tipoProdutor").value;
+            const campos = document.getElementById("camposOrganico");
+            campos.style.display = (tipo === "organico") ? "block" : "none";
+        }
+    </script>
+
+    <script src="js/cadastro_produtor.js"></script>
+</body>
+</html>

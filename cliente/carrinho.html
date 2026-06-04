@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho - FAST & FAIR</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cliente.css">
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- CARRINHO -->
+<script src="../js/carrinho.js"></script>
+
+<style>
+/* CONTAINER PRINCIPAL */
+.content {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(7, 7, 7, 0.85);
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    font-size: 42px;
+    color: white;
+    text-shadow: 0 0 10px black;
+    margin-bottom: 25px;
+}
+
+/* TABELA */
+.table-cliente {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.table-cliente th {
+    background: #2E7D32;
+    color: white;
+    padding: 14px;
+    font-size: 20px;
+}
+
+.table-cliente td {
+    padding: 14px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.table-cliente tr:nth-child(even) {
+    background: #070707;
+}
+
+.table-cliente tr:hover {
+    background: #E8F5E9;
+}
+
+/* BOTÃO FINALIZAR */
+.finalizar-btn {
+    margin-top: 25px;
+    width: 100%;
+    padding: 16px;
+    background: #2E7D32;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #1b5e20;
+    transition: 0.2s;
+}
+
+.finalizar-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 0 rgba(0,0,0,0.3);
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="produtos.html" class="menu-btn">Voltar</a>
+</nav>
+
+<div class="content">
+    <h1>Seu Carrinho</h1>
+
+    <table class="table-cliente">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Qtd</th>
+                <th>Preço</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaCarrinho"></tbody>
+    </table>
+
+    <button class="finalizar-btn" onclick="finalizarPedido()">Finalizar Pedido</button>
+</div>
+
+<script>
+/* 
+   CONFIGURAÇÃO DO SUPABASE
+ */
+const { createClient } = supabase;
+
+const db = createClient(
+    "https://iqpyptpacglgoawlvyai.supabase.co",
+    "sb_publishable_f6rQubRvqp2V1GBD-YI1yQ_Zd7A_7BW"
+);
+
+/* 
+   CARREGAR ITENS DO CARRINHO
+ */
+function carregarCarrinho() {
+    const carrinho = getCarrinho();
+    const tabela = document.getElementById("listaCarrinho");
+
+    tabela.innerHTML = "";
+
+    if (carrinho.length === 0) {
+        tabela.innerHTML = `
+            <tr>
+                <td colspan="3" style="text-align:center; font-size:20px;">
+                    Seu carrinho está vazio.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    carrinho.forEach(item => {
+        tabela.innerHTML += `
+            <tr>
+                <td>${item.nome}</td>
+                <td>${item.quantidade}</td>
+                <td>R$ ${item.preco.toFixed(2)}</td>
+            </tr>
+        `;
+    });
+}
+
+/* 
+   FINALIZAR PEDIDO
+ */
+async function finalizarPedido() {
+    const carrinho = getCarrinho();
+    const cliente = localStorage.getItem("usuario");
+
+    if (!cliente) {
+        alert("Erro: cliente não identificado.");
+        return;
+    }
+
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+
+    for (const item of carrinho) {
+        await db.from("pedidos").insert({
+            cliente_id: cliente,
+            produtor_id: item.produtor_id,
+            produto_id: item.id,
+            quantidade: item.quantidade,
+            total: item.preco * item.quantidade,
+            status: "pendente"
+        });
+    }
+
+    alert("Pedido enviado com sucesso!");
+    localStorage.removeItem("carrinho");
+    location.href = "cliente.html";
+}
+
+carregarCarrinho();
+</script>
+
+</body>
+</html>

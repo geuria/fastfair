@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos - FAST & FAIR</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cliente.css">
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="../index.html" class="menu-btn">Home</a>
+    <a href="cliente.html" class="menu-btn">Cliente</a>
+    <a href="carrinho.html" class="menu-btn">Carrinho</a>
+</nav>
+
+<div class="content">
+
+    <h1 id="tituloCategoria" style="color:white; text-shadow:0 0 10px black;">
+        Produtos
+    </h1>
+
+    <div id="listaProdutos" class="produtos-container">
+        <!-- Produtos serão carregados via JS -->
+    </div>
+
+</div>
+
+<script src="../js/cliente.js"></script>
+
+<script>
+// PEGAR CATEGORIA DA URL
+const params = new URLSearchParams(window.location.search);
+const categoria = params.get("cat");
+
+// TITULO BONITO
+const titulo = {
+    frutas: "Frutas Frescas",
+    legumes: "Legumes Selecionados",
+    hortalicas: "Hortaliças",
+    organicos: "Produtos Orgânicos",
+    temperos: "Temperos Naturais"
+};
+
+document.getElementById("tituloCategoria").innerText = titulo[categoria] || "Produtos";
+
+// LISTA DE PRODUTOS (VOCÊ PODE TROCAR PELOS DO BANCO)
+const produtos = {
+    frutas: [
+        { nome: "Banana", preco: 5.00, img: "../img/banana.jpg" },
+        { nome: "Maçã", preco: 7.00, img: "../img/maca.jpg" }
+    ],
+    legumes: [
+        { nome: "Cenoura", preco: 4.00, img: "../img/cenoura.jpg" },
+        { nome: "Batata", preco: 3.50, img: "../img/batata.jpg" }
+    ],
+    hortalicas: [
+        { nome: "Alface", preco: 2.50, img: "../img/alface.jpg" },
+        { nome: "Couve", preco: 3.00, img: "../img/couve.jpg" }
+    ],
+    organicos: [
+        { nome: "Tomate Orgânico", preco: 9.00, img: "../img/tomate.jpg" }
+    ],
+    temperos: [
+        { nome: "Pimenta", preco: 6.00, img: "../img/pimenta.jpg" }
+    ]
+};
+
+// CARREGAR PRODUTOS
+const lista = document.getElementById("listaProdutos");
+
+if (produtos[categoria]) {
+    produtos[categoria].forEach(p => {
+        lista.innerHTML += `
+            <div class="produto-card">
+                <img src="${p.img}" class="produto-img">
+                <h3>${p.nome}</h3>
+                <p>R$ ${p.preco.toFixed(2)}</p>
+                <button class="add-btn" onclick="adicionarAoCarrinho('${p.nome}', ${p.preco})">
+                    Adicionar ao carrinho
+                </button>
+            </div>
+        `;
+    });
+} else {
+    lista.innerHTML = "<p style='color:white;'>Nenhum produto encontrado.</p>";
+}
+</script>
+
+</body>
+</html>

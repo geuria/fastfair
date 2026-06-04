@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atualizar Status</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/entregador.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="entregador.html" class="menu-btn">Voltar</a>
+    <a href="../login.html" class="menu-btn">Sair</a>
+</nav>
+
+<div class="content">
+    <h1>Atualizar Status dos Pedidos</h1>
+
+    <table class="tabela-entregador">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Qtd</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaPedidos">
+            <tr><td colspan="5">Carregando...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+const { createClient } = supabase;
+
+const db = createClient(
+    "https://iqpyptpacglgoawlvyai.supabase.co",
+    "sb_publishable_f6rQubRvqp2V1GBD-YI1yQ_Zd7A_7BW"
+);
+
+async function carregarPedidos() {
+    const tabela = document.getElementById("listaPedidos");
+
+    const { data } = await db
+        .from("pedidos")
+        .select(`
+            *,
+            cliente:cliente_id (nome),
+            produto:produto_id (nome)
+        `)
+        .order("id", { ascending: false });
+
+    tabela.innerHTML = "";
+
+    data.forEach(p => {
+        tabela.innerHTML += `
+            <tr>
+                <td>${p.cliente?.nome}</td>
+                <td>${p.produto?.nome}</td>
+                <td>${p.quantidade}</td>
+                <td>${p.status}</td>
+                <td>
+                    <button onclick="atualizar(${p.id}, 'em rota')">Em Rota</button>
+                    <button onclick="atualizar(${p.id}, 'entregue')">Entregue</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+async function atualizar(id, status) {
+    await db.from("pedidos").update({ status }).eq("id", id);
+    carregarPedidos();
+}
+
+carregarPedidos();
+</script>
+
+</body>
+</html>

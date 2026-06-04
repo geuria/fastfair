@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Produtor - FAST & FAIR</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/produtor.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<!-- Botão Voltar -->
+<a href="javascript:history.back()" class="btn-voltar">← Voltar</a>
+
+<nav class="menu">
+    <a href="../login.html" class="menu-btn">Sair</a>
+</nav>
+
+<div class="content" style="text-align:center;">
+
+    <h1 class="texto-3d texto-contorno">Painel do Produtor</h1>
+
+    <div class="cards-produtor">
+
+        <div class="card-produtor" onclick="location.href='adicionar-produto.html'">
+            <h2 class="texto-3d texto-contorno">Adicionar Produto</h2>
+            <p>Cadastrar novos itens</p>
+        </div>
+
+        <div class="card-produtor" onclick="location.href='meus-produtos.html'">
+            <h2 class="texto-3d texto-contorno">Meus Produtos</h2>
+            <p>Gerenciar estoque e preços</p>
+        </div>
+
+        <div class="card-produtor" onclick="location.href='pedidos-recebidos.html'">
+            <h2 class="texto-3d texto-contorno">Pedidos Recebidos</h2>
+            <p>Pedidos feitos pelos clientes</p>
+        </div>
+
+        <div class="card-produtor" onclick="location.href='relatorios.html'">
+            <h2 class="texto-3d texto-contorno">Relatórios</h2>
+            <p>Resumo de vendas</p>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

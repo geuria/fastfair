@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Finalizar Pedido - FAST & FAIR</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/produtor.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<div class="login-container">
+    <h1 class="texto-3d texto-contorno" style="text-align:center;">Finalizar Pedido</h1>
+
+    <div class="login-box">
+
+        <div id="resumoPedido"></div>
+
+        <label class="texto-3d texto-contorno">Endereço de Entrega</label>
+        <input type="text" id="endereco" placeholder="Hotel, pousada, casa, ponto de referência">
+
+        <label class="texto-3d texto-contorno">Data da Entrega</label>
+        <input type="date" id="dataEntrega">
+
+        <label class="texto-3d texto-contorno">Horário da Entrega</label>
+        <select id="horarioEntrega">
+            <option value="08:00">08:00</option>
+            <option value="10:00">10:00</option>
+            <option value="16:00">16:00</option>
+        </select>
+
+        <div id="map" style="width:100%; height:350px; margin-top:15px;"></div>
+
+        <button id="btnFinalizar" class="login-btn texto-3d" style="margin-top:20px;">
+            Confirmar Pedido
+        </button>
+    </div>
+</div>
+
+<script src="../js/finalizar-pedido.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Entregador</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/entregador.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="../js/entregador.js"></script>
+<script type="module" src="../js/roteirizador.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="../login.html" class="menu-btn">Sair</a>
+</nav>
+
+<div class="content">
+    <h1>Painel do Entregador</h1>
+
+    <!-- AQUI O SEU entregador.js VAI RENDERIZAR OS PEDIDOS -->
+    <div id="listaPedidos" class="lista-pedidos">
+        Carregando pedidos...
+    </div>
+</div>
+
+</body>
+</html>

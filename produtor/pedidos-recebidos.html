@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedidos Recebidos</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/produtor.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="produtor.html" class="menu-btn">Voltar</a>
+</nav>
+
+<div class="content">
+    <h1 class="texto-3d texto-contorno">Pedidos Recebidos</h1>
+
+    <table class="table-produtor">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Qtd</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaPedidos">
+            <tr>
+                <td colspan="4" style="text-align:center; font-size:22px;">
+                    Carregando...
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="../js/produtor-db.js"></script>
+<script src="../js/pedidos-recebidos.js"></script>
+
+</body>
+</html>

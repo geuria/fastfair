@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home do Cliente - FAST & FAIR</title>
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<div class="login-container">
+
+    <h1 class="texto-3d texto-contorno" style="text-align:center;">
+        Bem-vindo(a), Cliente!
+    </h1>
+
+    <div class="login-box" style="text-align:center;">
+
+        <a href="produtos.html" class="login-btn texto-3d" style="display:block; margin-bottom:15px;">
+            Ver Produtos
+        </a>
+
+        <a href="cliente-fazer-pedidos.html" class="login-btn texto-3d" style="display:block; margin-bottom:15px;">
+            Fazer Pedido
+        </a>
+
+        <a href="carrinho.html" class="login-btn texto-3d" style="display:block; margin-bottom:15px;">
+            Meu Carrinho
+        </a>
+
+        <button onclick="logout()" class="login-btn texto-3d" style="background:red;">
+            Sair
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+function logout() {
+    localStorage.clear();
+    window.location.href = "../login.html";
+}
+</script>
+
+</body>
+</html>

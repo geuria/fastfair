@@ -1,0 +1,56 @@
+.admin-title {
+    color: #2E7D32;
+    margin-bottom: 20px;
+}
+
+.admin-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.admin-card {
+    width: 260px;
+    background: #2E7D32;
+    padding: 25px;
+    border-radius: 14px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    transition: .2s;
+}
+
+.admin-card:hover {
+    transform: translateY(-6px);
+}
+
+.table-admin {
+    width: 95%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-admin th {
+    background: #2E7D32;
+    color: white;
+    padding: 12px;
+}
+
+.table-admin td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.admin-box {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}

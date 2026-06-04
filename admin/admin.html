@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Administrativo</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/admin.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.png" alt="FAST & FAIR">
+</header>
+
+<nav class="menu">
+    <a href="../login.html" class="menu-btn">Sair</a>
+</nav>
+
+<div class="content">
+    <h1 class="admin-title">Painel Administrativo</h1>
+
+    <div class="admin-cards">
+
+        <div class="admin-card" onclick="location.href='usuarios.html'">
+            <h2>Usuários</h2>
+            <p>Gerenciar contas cadastradas</p>
+        </div>
+
+        <div class="admin-card" onclick="location.href='produtos.html'">
+            <h2>Produtos</h2>
+            <p>Listagem geral de produtos</p>
+        </div>
+
+        <div class="admin-card" onclick="location.href='pedidos.html'">
+            <h2>Pedidos</h2>
+            <p>Acompanhar pedidos realizados</p>
+        </div>
+
+        <div class="admin-card" onclick="location.href='feedbacks.html'">
+            <h2>Feedbacks</h2>
+            <p>Opiniões dos clientes</p>
+        </div>
+
+        <div class="admin-card" onclick="location.href='relatorios.html'">
+            <h2>Relatórios</h2>
+            <p>Resumo geral do sistema</p>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

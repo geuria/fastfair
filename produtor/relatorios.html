@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatórios - FAST & FAIR</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/produtor.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="../img/logo.jpg" alt="FAST & FAIR">
+</header>
+
+<a href="javascript:history.back()" class="btn-voltar">← Voltar</a>
+
+<h1 class="texto-3d texto-contorno" style="text-align:center;">Relatórios</h1>
+
+<div class="tabela-container">
+    <table class="tabela-produtos">
+        <thead>
+            <tr>
+                <th class="texto-3d texto-contorno">Produto</th>
+                <th class="texto-3d texto-contorno">Vendidos</th>
+                <th class="texto-3d texto-contorno">Faturamento</th>
+            </tr>
+        </thead>
+        <tbody id="listaRelatorios">
+            <tr><td colspan="3" class="texto-3d texto-contorno">Carregando...</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+const { createClient } = supabase;
+
+const db = createClient(
+    "https://iqpyptpacglgoawlvyai.supabase.co",
+    "sb_publishable_f6rQubRvqp2V1GBD-YI1yQ_Zd7A_7BW"
+);
+
+const produtor = localStorage.getItem("usuario");
+const tipo = localStorage.getItem("tipo");
+
+if (!produtor || tipo !== "produtor") {
+    alert("Acesso permitido somente ao produtor.");
+    window.location.href = "../login.html";
+}
+
+async function carregarRelatorios() {
+    const { data, error } = await db
+        .from("pedidos")
+        .select("*")
+        .eq("produtor_id", produtor)
+        .eq("status", "Aceito");
+
+    const tabela = document.getElementById("listaRelatorios");
+    tabela.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        tabela.innerHTML = `<tr><td colspan="3" class="texto-3d texto-contorno">Nenhuma venda registrada.</td></tr>`;
+        return;
+    }
+
+    const resumo = {};
+
+    data.forEach(p => {
+        if (!resumo[p.produto]) {
+            resumo[p.produto] = { qtd: 0, total: 0 };
+        }
+        resumo[p.produto].qtd += p.quantidade;
+        resumo[p.produto].total += p.total;
+    });
+
+    Object.keys(resumo).forEach(prod => {
+        tabela.innerHTML += `
+            <tr>
+                <td>${prod}</td>
+                <td>${resumo[prod].qtd}</td>
+                <td>R$ ${resumo[prod].total.toFixed(2)}</td>
+            </tr>
+        `;
+    });
+}
+
+carregarRelatorios();
+</script>
+
+</body>
+</html>
