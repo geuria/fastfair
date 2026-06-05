@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Cliente - FAST & FAIR</title>
+    <title>Login - FAST & FAIR</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -11,49 +11,58 @@
     <!-- Cabeçalho padrão -->
     <header>
         <div class="header-left">
-            <a href="escolher_tipo.html" class="btn-voltar">← Voltar</a>
+            <a href="index.html" class="btn-voltar">Voltar</a>
+            <img src="img/logo.jpg" alt="FAST & FAIR" class="logo">
         </div>
 
         <div class="header-right">
             <a href="login.html" class="btn-topo">Login</a>
-            <a href="escolher_tipo.html" class="btn-topo">Cadastro</a>
-            <img src="img/logo.jpg" alt="FAST & FAIR" class="logo">
+            <a href="cadastro.html" class="btn-topo">Cadastro</a>
+            <a href="carrinho.html" class="btn-topo">Carrinho</a>
         </div>
     </header>
 
+    <!-- Conteúdo principal -->
     <main class="content">
         <div class="login-container">
-            <h1>Cadastro de Cliente</h1>
+            <h1>Login</h1>
 
             <div class="login-box">
-
-                <label>Nome completo</label>
-                <input type="text" id="nome" placeholder="Seu nome">
-
                 <label>Email</label>
-                <input type="email" id="email" placeholder="Seu email">
+                <input type="email" id="email" placeholder="Seu email" required>
 
                 <label>Senha</label>
-                <input type="password" id="senha" placeholder="Crie uma senha">
+                <input type="password" id="senha" placeholder="Sua senha" required>
 
-                <label>CPF</label>
-                <input type="text" id="cpf" placeholder="000.000.000-00">
-
-                <label>Endereço</label>
-                <input type="text" id="endereco" placeholder="Rua, número, bairro">
-
-                <label>Telefone</label>
-                <input type="text" id="telefone" placeholder="(00) 00000-0000">
-
-                <button type="button" onclick="usarLocalizacao()">Usar minha localização</button>
-
-                <button type="submit" onclick="cadastrarCliente()">Cadastrar</button>
-
+                <button type="submit" onclick="fazerLogin()">Entrar</button>
             </div>
         </div>
     </main>
 
-    <script src="js/cadastro_cliente.js"></script>
+    <!-- Script de validação -->
+    <script>
+        function validarSenha(senha) {
+            // mínimo 8 caracteres, pelo menos uma letra, um número e um caractere especial
+            const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+            return regex.test(senha);
+        }
+
+        function fazerLogin() {
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            if (!validarSenha(senha)) {
+                alert("A senha deve ter no mínimo 8 caracteres, incluir letras, números e pelo menos um símbolo (@, #, $, etc).");
+                return;
+            }
+
+            // Aqui você faria a chamada ao servidor para validar email/senha
+            // Exemplo fictício:
+            // fetch("/api/login", { method: "POST", body: JSON.stringify({ email, senha }) })
+
+            alert("Login enviado com sucesso!");
+        }
+    </script>
 
 </body>
 </html>

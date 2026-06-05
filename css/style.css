@@ -22,6 +22,7 @@ header {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    margin-bottom: 30px; /* separa do conteúdo */
 }
 
 .header-left {
@@ -36,7 +37,7 @@ header {
 }
 
 header .logo {
-    height: 70px;
+    height: 60px;
     object-fit: contain;
     filter: brightness(1.2);
 }
